@@ -15,7 +15,7 @@ export default function Header({
                         </div>
                         <div className="my-auto">
                             <div className="text-xl md:text-3xl font-bold"><h1>Pariksha</h1></div>
-                            <div className="opacity-[0.5] pl-1"><h2>Pariksha, The Quiz Game!!</h2></div>
+                            <div className="opacity-[0.5] pl-1"><h2>Pariksha, The Quiz App!!</h2></div>
                         </div>
                     </a>
                 </div>

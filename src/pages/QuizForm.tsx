@@ -13,7 +13,8 @@ export default function QuizForm({
 }) {
     const { isPending, error, data } = useQuery({
         queryKey: ['questions'],
-        queryFn: () => fetch('https://the-trivia-api.com/v2/questions').then((res) => res.json())
+        queryFn: () => fetch('https://the-trivia-api.com/v2/questions').then((res) => res.json()),
+        refetchOnWindowFocus: false
     });
 
     const [questions, setQuestions] = useState<QuestionData[] | null>(null);
@@ -71,7 +72,7 @@ export default function QuizForm({
                     </div>
                     <div className="mt-5">
                         {suffleAnswer && suffleAnswer?.map((ans: string, key: number) => (
-                            <div key={key} className={`flex gap-3 my-1 rounded-xl py-1 px-2 ${revelAnswer ? (ans === question?.correctAnswer ? "border border-green-400" : "border border-red-300") : ""}`} onClick={() => handleCheckAnswer(ans === question?.correctAnswer)}>{revelAnswer && (ans === question?.correctAnswer ? <Check />: <X />)}{`${(["A", "B", "C", "D"])[key]}) ${ans}`}</div>
+                            <div key={key} className={`flex justify-between gap-3 my-1 rounded-xl py-1 px-2 ${revelAnswer ? (ans === question?.correctAnswer ? "border border-green-400" : "border border-red-300") : ""}`} onClick={() => handleCheckAnswer(ans === question?.correctAnswer)}>{`${(["A", "B", "C", "D"])[key]}) ${ans}`}{revelAnswer && (ans === question?.correctAnswer ? <Check className="my-auto" />: <X className="my-auto" />)}</div>
                         ))}
                     </div>
                     {revelAnswer && <Button className="md:self-end md:text-xl md:w-30" onClick={goToNextQuestion}>Next</Button>}

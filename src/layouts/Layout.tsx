@@ -15,7 +15,7 @@ export default function Layout({
         <ConfirmDialogProvider>
             <div className="bg-(--background) text-(--foreground)">
                 <Header setDialogOpen={setDialogOpen} />
-                <div className="w-full max-w-[1440px] mx-auto pt-[110px] z-1">
+                <div className="w-full max-w-[1440px] mx-auto py-[110px] z-1">
                     {children}
                     <Toaster position="top-center" />
                 </div>
