@@ -25,7 +25,9 @@ export default function QuizForm({
 
     const handleCheckAnswer = (check: boolean) => {
         setRevelAnswer(true);
-        check && setScore(score + 10);
+        if (!revelAnswer) {
+            check && setScore(score + 10);
+        }
     }
 
     const goToNextQuestion = () => {
