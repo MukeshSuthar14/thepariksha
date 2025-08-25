@@ -52,7 +52,7 @@ export default function QuizDashboard({
                     </table>
                 </div>
             </div>
-            <div className="flex flex-col items-center gap-2 w-full md:w-[50%]">
+            <div className="flex flex-col items-center gap-2 w-full md:w-[50%] md:sticky md:top-50 md:bottom-50">
                 <img className="hidden md:block size-30" src="favicon.ico" alt="Pariksha Logo" />
                 <h1 className="text-5xl font-bold">Pariksha</h1>
                 <h2 className="text-2xl">The Quiz App.</h2>

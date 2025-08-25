@@ -1,9 +1,11 @@
 import { Button } from "../components/ui/button";
 
 export default function Header({
-    setDialogOpen
+    setDialogOpen,
+    quizStart
 }: {
-    setDialogOpen: Function
+    setDialogOpen: Function,
+    quizStart: boolean
 }) {
     return (
         <header className="fixed left-0 right-0 top-0 z-20 p-2 md:p-5 bg-(--background) text-(--foreground) border-(--foreground) border-b-1">
@@ -20,7 +22,7 @@ export default function Header({
                     </a>
                 </div>
                 <div className="fixed bottom-2 right-2 md:static">
-                    <Button className="h-full font-bold text-base" onClick={() => setDialogOpen(true)}>Take a Quiz</Button>
+                    <Button className="h-full font-bold text-base" onClick={() => setDialogOpen(true)} disabled={quizStart}>Take a Quiz</Button>
                 </div>
             </div>
         </header>

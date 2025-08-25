@@ -7,11 +7,12 @@ const queryClient = new QueryClient();
 
 function App() {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [quizStart, setQuizStart] = useState<boolean>(false);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Layout setDialogOpen={setDialogOpen}>
-        <Home dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} />
+      <Layout setDialogOpen={setDialogOpen} quizStart={quizStart}>
+        <Home dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} quizStart={quizStart} setQuizStart={setQuizStart} />
       </Layout>
     </QueryClientProvider>
   )

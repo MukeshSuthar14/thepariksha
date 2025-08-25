@@ -3,7 +3,6 @@ import { AlertDialogCancel, AlertDialog, AlertDialogContent, AlertDialogDescript
 import { Button } from "../components/ui/button"
 import { Form } from "../components/ui/form"
 import Input from "../components/inputs/Input"
-import { useState } from "react"
 import QuizForm from "./QuizForm"
 import { zodResolver } from "@hookform/resolvers/zod";
 import QuizDashboard from "./QuizDashboard"
@@ -12,19 +11,22 @@ import { toast } from "sonner"
 
 type Props = {
     dialogOpen: boolean,
-    setDialogOpen: Function
+    setDialogOpen: Function,
+    quizStart: boolean, 
+    setQuizStart: Function
 }
 
 export default function Home({
     dialogOpen,
-    setDialogOpen
+    setDialogOpen,
+    quizStart, 
+    setQuizStart
 }: Props) {
     const defaultValues = { name: "" }
     const form = useForm<QuizFormProps>({
         defaultValues,
         resolver: zodResolver(QuizFormSchema)
     });
-    const [quizStart, setQuizStart] = useState<boolean>(false);
 
     const handleTaskStart = (data: any) => {
         if (data.name) localStorage.setItem("currentUserName", data.name);
@@ -34,12 +36,18 @@ export default function Home({
         form.reset(defaultValues);
     }
 
+    const handleKeyDown = (e: any) => {
+        if (e.keyCode === 13) {
+            form.handleSubmit(handleTaskStart)();
+        }
+    }
+
     return (
         <div className="py-auto">
             {quizStart ? (
-                <QuizForm setQuizStart={setQuizStart} />
-            ): (
-                <QuizDashboard setDialogOpen={setDialogOpen}/>
+                <QuizForm dialogOpen={dialogOpen} setQuizStart={setQuizStart} />
+            ) : (
+                <QuizDashboard setDialogOpen={setDialogOpen} />
             )}
             <AlertDialog open={dialogOpen}>
                 <Form {...form}>
@@ -53,7 +61,7 @@ export default function Home({
                             </AlertDialogDescription>
                             <div className="grid gap-4">
                                 <div className="grid gap-3">
-                                    <Input type="text" className="w-[100%]" autoComplete="off" placeholder="Enter Your Name Here..." name="name" />
+                                    <Input type="text" className="w-[100%]" autoComplete="off" placeholder="Enter Your Name Here..." name="name" onKeyDown={handleKeyDown} />
                                 </div>
                             </div>
                             <AlertDialogFooter className="gap-3">
